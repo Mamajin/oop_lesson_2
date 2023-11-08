@@ -122,6 +122,27 @@ print("The average number of passes made by forwards versus by midfielders")
 my_table1_forwards = my_table1.filter(lambda x: x['position'] == 'forward').aggregate(lambda x: sum(x)/len(x), 'passes')
 my_table1_mid = my_table1.filter(lambda x: x['position'] == 'midfielder').aggregate(lambda x: sum(x)/len(x), 'passes')
 print(f"{my_table1_forwards} vs {my_table1_mid}")
+print()
+
+
+# titanic section
+# dataset's key last,first,gender,age,class,fare,embarked,survived
+my_table3 = my_DB.search('titanic')
+print("The average fare paid by passengers in the first class versus \n"
+      "in the third class")
+first_avg = my_table3.filter(lambda x: int(x['class']) == 1).aggregate(lambda x: sum(x)/len(x), 'fare')
+third_avg = my_table3.filter(lambda x: int(x['class']) == 3).aggregate(lambda x: sum(x)/len(x), 'fare')
+print(f"{first_avg} vs {third_avg}")
+print()
+
+print("The survival rate of male versus female passengers")
+male_total = len(my_table3.filter(lambda x: x['gender'] == 'M').table)
+male_survive = len(my_table3.filter(lambda x: x['gender'] == 'M').filter(lambda x: x['survived'] == 'yes').table)
+male_rate = male_survive / male_total * 100
+female_total = len(my_table3.filter(lambda x: x['gender'] == 'F').table)
+female_survive = len(my_table3.filter(lambda x: x['gender'] == 'F').filter(lambda x: x['survived'] == 'yes').table)
+female_rate = female_survive / female_total * 100
+print(f"{male_rate:.2f}% vs {female_rate:.2f}%")
 
 # table1 = Table('cities', cities)
 # table2 = Table('countries', countries)
