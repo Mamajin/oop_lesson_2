@@ -143,7 +143,11 @@ female_total = len(my_table3.filter(lambda x: x['gender'] == 'F').table)
 female_survive = len(my_table3.filter(lambda x: x['gender'] == 'F').filter(lambda x: x['survived'] == 'yes').table)
 female_rate = female_survive / female_total * 100
 print(f"{male_rate:.2f}% vs {female_rate:.2f}%")
+print()
 
+print("Total number of male passengers embarked at Southampton")
+m_embarked_south = len(my_table3.filter(lambda x: x['gender'] == 'M').filter(lambda x: x['embarked'] == 'Southampton').table)
+print(m_embarked_south)
 # table1 = Table('cities', cities)
 # table2 = Table('countries', countries)
 # my_DB = DB()
